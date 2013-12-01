@@ -8,3 +8,7 @@ rvm:
   - rbx
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
+deploy:
+  provider: heroku
+  secure: "Ho3AA5QOkZ2dSnPnRzhYDYpt2IeyPz2MgD8iWzzn2o+DGlm1jzzJYmusOFuKZli4LmZo8bd0C5vzNpZgAImAsO0wgkf47jItDrkk3L+dB8btUQlJrMRPE7NiGBOqk9rvjL85bBCochrc0cJRlo9hYoUoUtDcWldr6FQKhYCw/1s="
+  app: mysterious-atoll-4279
