@@ -1,14 +1,15 @@
 language: ruby
 rvm:
-  - "1.8.7"
-  - "1.9.2"
-  - "1.9.3"
-  - jruby-18mode # JRuby in 1.8 mode
-  - jruby-19mode # JRuby in 1.9 mode
-  - rbx
-# uncomment this line if your project needs to run something other than `rake`:
-# script: bundle exec rspec spec
+- 1.8.7
+- 1.9.2
+- 1.9.3
+- jruby-18mode
+- jruby-19mode
+- rbx
 deploy:
   provider: heroku
-  secure: "Ho3AA5QOkZ2dSnPnRzhYDYpt2IeyPz2MgD8iWzzn2o+DGlm1jzzJYmusOFuKZli4LmZo8bd0C5vzNpZgAImAsO0wgkf47jItDrkk3L+dB8btUQlJrMRPE7NiGBOqk9rvjL85bBCochrc0cJRlo9hYoUoUtDcWldr6FQKhYCw/1s="
+  api_key:
+    secure: BKJZkqT0FArir0M4iFar3pOPPCePscj0opnbdbdDCg05h3g3jJQ1a5dAGA0rQ4JhTIiETIl+CZZMkgMUD2np3PxAl6h10EXGM18Wcc/9gLpDpEwmnSs81cH7/B8d5h4baqXmMBL7nRj4B2Qy5t6s7VpoEB4jHBd4OS27Du/JpKU=
   app: mysterious-atoll-4279
+  on:
+    repo: brianmc/paymentdemo
