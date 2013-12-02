@@ -6,5 +6,6 @@ deploy:
   api_key:
     secure: BKJZkqT0FArir0M4iFar3pOPPCePscj0opnbdbdDCg05h3g3jJQ1a5dAGA0rQ4JhTIiETIl+CZZMkgMUD2np3PxAl6h10EXGM18Wcc/9gLpDpEwmnSs81cH7/B8d5h4baqXmMBL7nRj4B2Qy5t6s7VpoEB4jHBd4OS27Du/JpKU=
   app: mysterious-atoll-4279
+  run: "rake db:migrate"
   on:
     repo: brianmc/paymentdemo
