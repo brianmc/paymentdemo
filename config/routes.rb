@@ -1,5 +1,7 @@
 Paymentdemo::Application.routes.draw do
   get "bitcoin/home"
+  get "bitcoin/receipt"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
