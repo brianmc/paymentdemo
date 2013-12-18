@@ -1,4 +1,5 @@
 Paymentdemo::Application.routes.draw do
+  get "docs/home"
   get "bitcoin/home"
   get "bitcoin/receipt"
 
