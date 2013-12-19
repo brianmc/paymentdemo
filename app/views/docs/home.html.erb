@@ -3,7 +3,6 @@
   <head>
     <link href="http://getbootstrap.com/docs-assets/css/docs.css" rel="stylesheet">
   <!--  <link href="http://getbootstrap.com/docs-assets/css/pygments-manni.css" rel="stylesheet"> -->
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   </head>
 
 
@@ -147,9 +146,39 @@
     <div class="page-header">
       <h1 id="dropdowns">Payment Transactions</h1>
     </div>
-    <p class="lead">Toggleable, contextual menu for displaying lists of links. Made interactive with the <a href="../javascript/#dropdowns">dropdown JavaScript plugin</a>.</p>
+    <p class="lead">The following API methods allow you to authorize a payment transaction, refund a payment, etc.</p>
 
-    <h3 id="dropdowns-example">Example</h3>
+    <h3 id="dropdowns-example">Create Transaction</h3>
+    <p>The &lt;createTransactionRequest&gt; XML type has the following elements:</p>
+    <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Value</th>
+            <th>Format</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>transactionType</td>
+            <td>Type of transaction (optional)</td>
+            <td>authOnlyTransaction<br/>authCaptureTransaction</td>
+            <td>If the value submitted does not match a supported value, the transaction is rejected.</td>
+          </tr>
+          <tr>
+            <td>amount</td>
+            <td>Amount of the transaction (Required)</td>
+            <td>Up to 15 digits with a decimal point</td>
+            <td>This is the TOTAL amount</td>
+          </tr>
+          <tr>
+            <td>cardNumber</td>
+            <td colspan="2"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
 </div>
 
   <!-- Button Groups
@@ -163,6 +192,5 @@
   </div>
   </div>
 
-    <script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
 
 </body>
