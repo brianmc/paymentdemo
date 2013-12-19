@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <link href="http://getbootstrap.com/docs-assets/css/docs.css" rel="stylesheet">
-    <link href="http://getbootstrap.com/docs-assets/css/pygments-manni.css" rel="stylesheet"> 
+  <!--  <link href="http://getbootstrap.com/docs-assets/css/pygments-manni.css" rel="stylesheet"> -->
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   </head>
 
@@ -95,6 +95,50 @@
           </div>
         </div>
 
+<div class="col-md-9" role="console">
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          API Console 
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+  <div class="panel-body">
+    <p>Sample XML for each API method is presented below.  Click Try It to run this request against our sandbox.  Amend the sample XML to test optional fields and other use cases.</p>
+      <form class="form-horizontal">
+        <div class="form-group"> 
+          <label for="inputRequest" class="col-sm-2 control-label">Request</label>
+          <div class="col-sm-10">
+             <textarea class="form-control" id="inputRequest" rows="3">
+&lt;getTransactionListRequest xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
+    &lt;merchantAuthentication&gt;
+        &lt;name&gt;API_LOGIN_ID&lt;/name&gt;
+        &lt;transactionKey&gt;API_TRANSACTION_KEY&lt;/transactionKey&gt;
+    &lt;/merchantAuthentication&gt;
+    &lt;batchId&gt;834801&lt;/batchId&gt;
+&lt;/getTransactionListRequest&gt;
+             </textarea>
+          </div>
+        </div>
+        <div class="form-group"> 
+          <button type="button" class="btn btn-primary pull-right">Try It!</button>
+        </div>
+        <div class="form-group"> 
+          <label for="inputResponse" class="col-sm-2 control-label">Response</label>
+          <div class="col-sm-10">
+             <textarea class="form-control" id="inputResponse" rows="3"></textarea>
+          </div>
+        </div>
+      </form>
+   </div>
+</div>
+</div>
+
+
 <div class="col-md-9" role="main">
 
 <!-- Dropdowns
@@ -118,4 +162,7 @@
 
   </div>
   </div>
+
+    <script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
+
 </body>
