@@ -3,6 +3,7 @@
   <head>
     <link href="http://getbootstrap.com/docs-assets/css/docs.css" rel="stylesheet">
     <link href="http://getbootstrap.com/docs-assets/css/pygments-manni.css" rel="stylesheet"> 
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   </head>
 
 
@@ -18,7 +19,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="../" class="navbar-brand">Authorize.Net</a>
+      <a href="../" class="navbar-brand">Authorize</a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -29,12 +30,15 @@
           <a href="../components">API</a>
         </li>
         <li>
+          <a href="../javascript">Client Libraries</a>
+        </li>
+        <li>
           <a href="../javascript">Authentication</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="../about">About</a>
+          <a href="../about">Back to Developer Center</a>
         </li>
       </ul>
     </nav>
@@ -50,16 +54,13 @@
 <li>
   <a href="#dropdowns">Payment Transactions</a>
   <ul class="nav">
-    <li><a href="#dropdowns-example">Example</a></li>
-    <li><a href="#dropdowns-alignment">Alignment options</a></li>
-    <li><a href="#dropdowns-headers">Headers</a></li>
-    <li><a href="#dropdowns-disabled">Disabled menu items</a></li>
+    <li><a href="#dropdowns-example">Create Transaction</a></li>
   </ul>
 </li>
 <li>
   <a href="#btn-groups">Customer Profiles</a>
   <ul class="nav">
-    <li><a href="#btn-groups-single">Basic example</a></li>
+    <li><a href="#btn-groups-single">Create Customer Profile</a></li>
     <li><a href="#btn-groups-toolbar">Button toolbar</a></li>
     <li><a href="#btn-groups-sizing">Sizing</a></li>
     <li><a href="#btn-groups-nested">Nesting</a></li>
@@ -117,3 +118,4 @@
 
   </div>
   </div>
+</body>
