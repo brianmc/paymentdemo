@@ -3,6 +3,73 @@
   <head>
     <link href="http://getbootstrap.com/docs-assets/css/docs.css" rel="stylesheet">
   <!--  <link href="http://getbootstrap.com/docs-assets/css/pygments-manni.css" rel="stylesheet"> -->
+
+  <script language="javascript" type="text/javascript">
+// <!CDATA[
+function XHConn()
+{
+  var xmlhttp, bComplete = false;
+  try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); }
+  catch (e) { try { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }
+  catch (e) { try { xmlhttp = new XMLHttpRequest(); }
+  catch (e) { xmlhttp = false; }}}
+  if (!xmlhttp) return null;
+  this.connect = function(sURL, sPostData, fnDone)
+  {
+    if (!xmlhttp) return false;
+    bComplete = false;
+
+    try {
+      xmlhttp.open("POST", sURL, true);
+      xmlhttp.setRequestHeader("Method", "POST "+sURL+" HTTP/1.1");
+      xmlhttp.setRequestHeader("Content-Type", "text/xml");
+      xmlhttp.onreadystatechange = function(){
+        if (xmlhttp.readyState == 4 && !bComplete)
+        {
+          bComplete = true;
+          fnDone(xmlhttp);
+        }
+      };
+      xmlhttp.send(sPostData);
+    }
+    catch(z) {
+      alert(z);
+      return false;
+    }
+    return true;
+  };
+  return this;
+}
+
+var g_xc = new XHConn();
+
+function btnSend_onclick() {
+  document.getElementById("btnSend").disabled = true;
+  document.getElementById("txtRespXml").innerHTML = "";
+  document.getElementById("spnStatusCode").innerHTML = "";
+  var fnWhenDone = function (oXML) {
+    if (oXML.status && oXML.status != "200") {
+      document.getElementById("spnStatusCode").innerHTML = "HTTP status code: " + oXML.status.toString().replace(/</g, "&lt;");
+    }
+    var txt = oXML.responseText;
+    txt = txt.replace(/></g, "> <");
+    txt = txt.replace(/</g, "&lt;");
+    txt = txt.replace(/>/g, "&gt;");
+    document.getElementById("txtRespXml").innerHTML = txt;
+    document.getElementById("btnSend").disabled = false;
+  };
+  g_xc.connect("https://apitest.authorize.net/xml/v1/request.api", document.getElementById("txtReqXml").value, fnWhenDone);
+}
+
+function selUrls_onChange(obj) {
+  if (document.getElementById("selUrls").value) {
+    document.getElementById("txtUrl").value = document.getElementById("selUrls").value;
+  }
+}
+
+// ]]>
+</script>
+
   </head>
 
 
@@ -94,48 +161,6 @@
           </div>
         </div>
 
-<div class="col-md-9" role="console">
-
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          API Console 
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
-  <div class="panel-body">
-    <p>Sample XML for each API method is presented below.  Click Try It to run this request against our sandbox.  Amend the sample XML to test optional fields and other use cases.</p>
-      <form class="form-horizontal">
-        <div class="form-group"> 
-          <label for="inputRequest" class="col-sm-2 control-label">Request</label>
-          <div class="col-sm-10">
-             <textarea class="form-control" id="inputRequest" rows="3">
-&lt;getTransactionListRequest xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
-    &lt;merchantAuthentication&gt;
-        &lt;name&gt;API_LOGIN_ID&lt;/name&gt;
-        &lt;transactionKey&gt;API_TRANSACTION_KEY&lt;/transactionKey&gt;
-    &lt;/merchantAuthentication&gt;
-    &lt;batchId&gt;834801&lt;/batchId&gt;
-&lt;/getTransactionListRequest&gt;
-             </textarea>
-          </div>
-        </div>
-        <div class="form-group"> 
-          <button type="button" class="btn btn-primary pull-right">Try It!</button>
-        </div>
-        <div class="form-group"> 
-          <label for="inputResponse" class="col-sm-2 control-label">Response</label>
-          <div class="col-sm-10">
-             <textarea class="form-control" id="inputResponse" rows="3"></textarea>
-          </div>
-        </div>
-      </form>
-   </div>
-</div>
-</div>
 
 
 <div class="col-md-9" role="main">
@@ -149,7 +174,14 @@
     <p class="lead">The following API methods allow you to authorize a payment transaction, refund a payment, etc.</p>
 
     <h3 id="dropdowns-example">Create Transaction</h3>
-    <p>The &lt;createTransactionRequest&gt; XML type has the following elements:</p>
+    <div class="bs-example bs-example-tabs">
+      <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Fields</a></li>
+        <li><a href="#profile" data-toggle="tab">Try it</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+        <p>The &lt;createTransactionRequest&gt; XML type has the following elements:</p>
     <table class="table table-condensed">
         <thead>
           <tr>
@@ -179,6 +211,29 @@
           </tr>
         </tbody>
       </table>
+        </div>
+        <div class="tab-pane fade" id="profile">
+           <form method="post" action="">
+           <p>
+              <textarea id="txtReqXml" name="txtReqXml" cols="80" rows="6" style="">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;isAliveRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd"&gt;
+    &lt;refId&gt;refid1&lt;/refId&gt;
+&lt;/isAliveRequest&gt;</textarea>
+           </p>
+    <p>
+      <input type="button" id="btnSend" name="btnSend" value="Send" onclick="return btnSend_onclick()" />
+      <span style="font-size:smaller;">Click here to send the XML request.</span>
+    </p>
+    <div><span class="header">Response:</span> <span id="spnStatusCode" class="error"></span></div>
+    <p>
+      <textarea id="txtRespXml" name="txtRespXml" cols="80" rows="6"></textarea>
+    </p>
+  </form>
+
+        </div>
+      </div>
+  </div>
 </div>
 
   <!-- Button Groups
@@ -188,7 +243,65 @@
       <h1 id="btn-groups">Customer Profiles</h1>
     </div>
     <p class="lead">Create a profile to store your customers payment and shipping info</p>
+   <div class="bs-example bs-example-tabs">
+      <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Fields</a></li>
+        <li><a href="#profile" data-toggle="tab">Try it</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+        <p>The &lt;createTransactionRequest&gt; XML type has the following elements:</p>
+    <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Value</th>
+            <th>Format</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>transactionType</td>
+            <td>Type of transaction (optional)</td>
+            <td>authOnlyTransaction<br/>authCaptureTransaction</td>
+            <td>If the value submitted does not match a supported value, the transaction is rejected.</td>
+          </tr>
+          <tr>
+            <td>amount</td>
+            <td>Amount of the transaction (Required)</td>
+            <td>Up to 15 digits with a decimal point</td>
+            <td>This is the TOTAL amount</td>
+          </tr>
+          <tr>
+            <td>cardNumber</td>
+            <td colspan="2"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+        </div>
+        <div class="tab-pane fade" id="profile">
+           <form method="post" action="">
+           <p>
+              <textarea id="txtReqXml" name="txtReqXml" cols="80" rows="16" style="">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;isAliveRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd"&gt;
+    &lt;refId&gt;refid1&lt;/refId&gt;
+&lt;/isAliveRequest&gt;</textarea>
+           </p>
+    <p>
+      <input type="button" id="btnSend" name="btnSend" value="Send" onclick="return btnSend_onclick()" />
+      <span style="font-size:smaller;">Click here to send the XML request.</span>
+    </p>
+    <div><span class="header">Response:</span> <span id="spnStatusCode" class="error"></span></div>
+    <p>
+      <textarea id="txtRespXml" name="txtRespXml" cols="80" rows="10"></textarea>
+    </p>
+  </form>
 
+        </div>
+      </div>
   </div>
   </div>
 
