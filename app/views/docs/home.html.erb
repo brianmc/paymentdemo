@@ -1,79 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <link href="http://getbootstrap.com/docs-assets/css/docs.css" rel="stylesheet">
-  <!--  <link href="http://getbootstrap.com/docs-assets/css/pygments-manni.css" rel="stylesheet"> -->
 
-  <script language="javascript" type="text/javascript">
-// <!CDATA[
-function XHConn()
-{
-  var xmlhttp, bComplete = false;
-  try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); }
-  catch (e) { try { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }
-  catch (e) { try { xmlhttp = new XMLHttpRequest(); }
-  catch (e) { xmlhttp = false; }}}
-  if (!xmlhttp) return null;
-  this.connect = function(sURL, sPostData, fnDone)
-  {
-    if (!xmlhttp) return false;
-    bComplete = false;
-
-    try {
-      xmlhttp.open("POST", sURL, true);
-      xmlhttp.setRequestHeader("Method", "POST "+sURL+" HTTP/1.1");
-      xmlhttp.setRequestHeader("Content-Type", "text/xml");
-      xmlhttp.onreadystatechange = function(){
-        if (xmlhttp.readyState == 4 && !bComplete)
-        {
-          bComplete = true;
-          fnDone(xmlhttp);
-        }
-      };
-      xmlhttp.send(sPostData);
-    }
-    catch(z) {
-      alert(z);
-      return false;
-    }
-    return true;
-  };
-  return this;
-}
-
-var g_xc = new XHConn();
-
-function btnSend_onclick() {
-  document.getElementById("btnSend").disabled = true;
-  document.getElementById("txtRespXml").innerHTML = "";
-  document.getElementById("spnStatusCode").innerHTML = "";
-  var fnWhenDone = function (oXML) {
-    if (oXML.status && oXML.status != "200") {
-      document.getElementById("spnStatusCode").innerHTML = "HTTP status code: " + oXML.status.toString().replace(/</g, "&lt;");
-    }
-    var txt = oXML.responseText;
-    txt = txt.replace(/></g, "> <");
-    txt = txt.replace(/</g, "&lt;");
-    txt = txt.replace(/>/g, "&gt;");
-    document.getElementById("txtRespXml").innerHTML = txt;
-    document.getElementById("btnSend").disabled = false;
-  };
-  g_xc.connect("https://apitest.authorize.net/xml/v1/request.api", document.getElementById("txtReqXml").value, fnWhenDone);
-}
-
-function selUrls_onChange(obj) {
-  if (document.getElementById("selUrls").value) {
-    document.getElementById("txtUrl").value = document.getElementById("selUrls").value;
-  }
-}
-
-// ]]>
-</script>
-
-  </head>
-
-
-<body>
+ 
 
     <!-- Docs master nav -->
     <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
@@ -112,55 +38,41 @@ function selUrls_onChange(obj) {
 </header>
 
 
-    <div class="container bs-docs-container">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="bs-sidebar hidden-print" role="complementary">
-            <ul class="nav bs-sidenav">
-<li>
-  <a href="#dropdowns">Payment Transactions</a>
-  <ul class="nav">
-    <li><a href="#dropdowns-example">Create Transaction</a></li>
-  </ul>
-</li>
-<li>
-  <a href="#btn-groups">Customer Profiles</a>
-  <ul class="nav">
-    <li><a href="#btn-groups-single">Create Customer Profile</a></li>
-    <li><a href="#btn-groups-toolbar">Button toolbar</a></li>
-    <li><a href="#btn-groups-sizing">Sizing</a></li>
-    <li><a href="#btn-groups-nested">Nesting</a></li>
-    <li><a href="#btn-groups-vertical">Vertical variation</a></li>
-    <li><a href="#btn-groups-justified">Justified link variation</a></li>
-  </ul>
-</li>
-<li>
-  <a href="#btn-groups">Recurring Billing</a>
-  <ul class="nav">
-    <li><a href="#btn-groups-single">Basic example</a></li>
-    <li><a href="#btn-groups-toolbar">Button toolbar</a></li>
-    <li><a href="#btn-groups-sizing">Sizing</a></li>
-    <li><a href="#btn-groups-nested">Nesting</a></li>
-    <li><a href="#btn-groups-vertical">Vertical variation</a></li>
-    <li><a href="#btn-groups-justified">Justified link variation</a></li>
-  </ul>
-</li>
-
-<li>
-  <a href="#btn-groups">Reporting</a>
-  <ul class="nav">
-    <li><a href="#btn-groups-single">Basic example</a></li>
-    <li><a href="#btn-groups-toolbar">Button toolbar</a></li>
-    <li><a href="#btn-groups-sizing">Sizing</a></li>
-    <li><a href="#btn-groups-nested">Nesting</a></li>
-    <li><a href="#btn-groups-vertical">Vertical variation</a></li>
-    <li><a href="#btn-groups-justified">Justified link variation</a></li>
-  </ul>
-</li>
-            </ul>
-          </div>
+<div class="container bs-docs-container">
+  <div class="row">
+    <div class="col-md-3">
+        <div class="bs-sidebar hidden-print" role="complementary">
+          <ul class="nav bs-sidenav">
+            <li>
+              <a href="#transactions">Payment Transactions</a>
+              <ul class="nav">
+                <li><a href="#transactions-create">Create Transaction</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#profiles">Customer Profiles</a>
+              <ul class="nav">
+                <li><a href="#profiles-create-customer">Create Customer Profile</a></li>
+                <li><a href="#profiles-update-customer">Update Customer Profile</a></li>
+                <li><a href="#profiles-delete-customer">Delete Customer Profile</a></li>
+                <li><a href="#profiles-create-payment">Create Payment Profile</a></li>
+              </ul>
+            </li>
+             <li>
+              <a href="#recurring">Recurring Billing</a>
+              <ul class="nav">
+                <li><a href="#recurring-create">Create Subscription</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#reporting">Reporting</a>
+              <ul class="nav">
+                <li><a href="#reporting-transaction-list">Get Transaction List</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
-
+    </div>
 
 
 <div class="col-md-9" role="main">
@@ -169,11 +81,11 @@ function selUrls_onChange(obj) {
   ================================================== -->
   <div class="bs-docs-section">
     <div class="page-header">
-      <h1 id="dropdowns">Payment Transactions</h1>
+      <h1 id="transactions">Payment Transactions</h1>
     </div>
     <p class="lead">The following API methods allow you to authorize a payment transaction, refund a payment, etc.</p>
 
-    <h3 id="dropdowns-example">Create Transaction</h3>
+    <h3 id="dtransactions-create">Create Transaction</h3>
     <div class="bs-example bs-example-tabs">
       <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#home" data-toggle="tab">Fields</a></li>
@@ -240,9 +152,11 @@ function selUrls_onChange(obj) {
   ================================================== -->
   <div class="bs-docs-section">
     <div class="page-header">
-      <h1 id="btn-groups">Customer Profiles</h1>
+      <h1 id="profiles">Customer Profiles</h1>
     </div>
     <p class="lead">Create a profile to store your customers payment and shipping info</p>
+
+    <h3 id="profiles-create-customer">Create Customer Profile</h3>
    <div class="bs-example bs-example-tabs">
       <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#home" data-toggle="tab">Fields</a></li>
@@ -282,28 +196,81 @@ function selUrls_onChange(obj) {
       </table>
         </div>
         <div class="tab-pane fade" id="profile">
-           <form method="post" action="">
-           <p>
-              <textarea id="txtReqXml" name="txtReqXml" cols="80" rows="16" style="">
-&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;isAliveRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd"&gt;
-    &lt;refId&gt;refid1&lt;/refId&gt;
-&lt;/isAliveRequest&gt;</textarea>
-           </p>
-    <p>
-      <input type="button" id="btnSend" name="btnSend" value="Send" onclick="return btnSend_onclick()" />
-      <span style="font-size:smaller;">Click here to send the XML request.</span>
-    </p>
-    <div><span class="header">Response:</span> <span id="spnStatusCode" class="error"></span></div>
-    <p>
-      <textarea id="txtRespXml" name="txtRespXml" cols="80" rows="10"></textarea>
-    </p>
-  </form>
 
         </div>
       </div>
   </div>
   </div>
 
+<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+ <script language="javascript" type="text/javascript">
+// <!CDATA[
+function XHConn()
+{
+  var xmlhttp, bComplete = false;
+  try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); }
+  catch (e) { try { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }
+  catch (e) { try { xmlhttp = new XMLHttpRequest(); }
+  catch (e) { xmlhttp = false; }}}
+  if (!xmlhttp) return null;
+
+  this.connect = function(sURL, sPostData, fnDone)
+  {
+    if (!xmlhttp) return false;
+    bComplete = false;
+
+    try {
+      xmlhttp.open("POST", sURL, true);
+      xmlhttp.setRequestHeader("Method", "POST "+sURL+" HTTP/1.1");
+      xmlhttp.setRequestHeader("Content-Type", "text/xml");
+      xmlhttp.onreadystatechange = function(){
+        if (xmlhttp.readyState == 4 && !bComplete)
+        {
+          bComplete = true;
+          fnDone(xmlhttp);
+        }
+      };
+      xmlhttp.send(sPostData);
+    }
+    catch(z) {
+      alert(z);
+      return false;
+    }
+    return true;
+  };
+  return this;
+}
+
+var g_xc = new XHConn();
+
+function btnSend_onclick() {
+  
+  document.getElementById("btnSend").disabled = true;
+  document.getElementById("txtRespXml").innerHTML = "";
+  document.getElementById("spnStatusCode").innerHTML = "";
+  var fnWhenDone = function (oXML) {
+    if (oXML.status && oXML.status != "200") {
+      document.getElementById("spnStatusCode").innerHTML = "HTTP status code: " + oXML.status.toString().replace(/</g, "&lt;");
+    }
+    var txt = oXML.responseText;
+    txt = txt.replace(/></g, "> <");
+    txt = txt.replace(/</g, "&lt;");
+    txt = txt.replace(/>/g, "&gt;");
+    document.getElementById("txtRespXml").innerHTML = txt;
+    document.getElementById("btnSend").disabled = false;
+  };
+  g_xc.connect("https://apitest.authorize.net/xml/v1/request.api", document.getElementById("txtReqXml").value, fnWhenDone);
+}
+
+function selUrls_onChange(obj) {
+  if (document.getElementById("selUrls").value) {
+    document.getElementById("txtUrl").value = document.getElementById("selUrls").value;
+  }
+}
+
+// ]]>
+</script>
 
 </body>
