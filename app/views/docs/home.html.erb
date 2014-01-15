@@ -157,6 +157,7 @@
     <p class="lead">Create a profile to store your customers payment and shipping info</p>
 
     <h3 id="profiles-create-customer">Create Customer Profile</h3>
+    <p>Create a new customer profile along with any customer payment profiles and customer shipping addresses for the customer profile</p>
    <div class="bs-example bs-example-tabs">
       <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#home" data-toggle="tab">Fields</a></li>
@@ -164,7 +165,7 @@
       </ul>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="home">
-        <p>The &lt;createTransactionRequest&gt; XML type has the following elements:</p>
+        <p>The &lt;createCustomerProfile&gt; XML type has the following elements:</p>
     <table class="table table-condensed">
         <thead>
           <tr>
@@ -196,10 +197,101 @@
       </table>
         </div>
         <div class="tab-pane fade" id="profile">
-
         </div>
       </div>
   </div>
+
+  <h3 id="profiles-update-customer">Update Customer Profile</h3>
+   <p>Update an existing customer profile.</p>
+   <div class="bs-example bs-example-tabs">
+      <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Fields</a></li>
+        <li><a href="#profile" data-toggle="tab">Try it</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+        <p>The &lt;updateCustomerProfile&gt; XML type has the following elements:</p>
+    <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Value</th>
+            <th>Format</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>transactionType</td>
+            <td>Type of transaction (optional)</td>
+            <td>authOnlyTransaction<br/>authCaptureTransaction</td>
+            <td>If the value submitted does not match a supported value, the transaction is rejected.</td>
+          </tr>
+          <tr>
+            <td>amount</td>
+            <td>Amount of the transaction (Required)</td>
+            <td>Up to 15 digits with a decimal point</td>
+            <td>This is the TOTAL amount</td>
+          </tr>
+          <tr>
+            <td>cardNumber</td>
+            <td colspan="2"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+        </div>
+        <div class="tab-pane fade" id="profile">
+        </div>
+      </div>
+  </div>
+
+
+  <h3 id="profiles-delete-customer">Delete Customer Profile</h3>
+  <p>Delete an existing customer profile along with all associated customer payment profiles and customer shipping addresses.</p>
+   <div class="bs-example bs-example-tabs">
+      <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Fields</a></li>
+        <li><a href="#profile" data-toggle="tab">Try it</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+        <p>The &lt;deleteCustomerProfile&gt; XML type has the following elements:</p>
+    <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Value</th>
+            <th>Format</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>transactionType</td>
+            <td>Type of transaction (optional)</td>
+            <td>authOnlyTransaction<br/>authCaptureTransaction</td>
+            <td>If the value submitted does not match a supported value, the transaction is rejected.</td>
+          </tr>
+          <tr>
+            <td>amount</td>
+            <td>Amount of the transaction (Required)</td>
+            <td>Up to 15 digits with a decimal point</td>
+            <td>This is the TOTAL amount</td>
+          </tr>
+          <tr>
+            <td>cardNumber</td>
+            <td colspan="2"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+        </div>
+        <div class="tab-pane fade" id="profile">
+        </div>
+      </div>
+  </div>
+
   </div>
 
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
