@@ -104,23 +104,84 @@
           </tr>
         </thead>
         <tbody>
+          
           <tr>
-            <td>transactionType</td>
-            <td>Type of transaction (optional)</td>
-            <td>authOnlyTransaction<br/>authCaptureTransaction</td>
-            <td>If the value submitted does not match a supported value, the transaction is rejected.</td>
-          </tr>
-          <tr>
-            <td>amount</td>
-            <td>Amount of the transaction (Required)</td>
-            <td>Up to 15 digits with a decimal point</td>
-            <td>This is the TOTAL amount</td>
-          </tr>
-          <tr>
-            <td>cardNumber</td>
-            <td colspan="2"></td>
+            <td>firstName</td>
+            <td>The customer's first name</td>
+            <td>Up to 50 characters (no symbols)</td>
             <td></td>
           </tr>
+          
+          <tr>
+            <td>lastName</td>
+            <td>The customer's last name</td>
+            <td>Up to 50 characters (no symbols)</td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>company</td>
+            <td>The name of the company associated with the customer, if applicable</td>
+            <td>Up to 50 characters (no symbols)</td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>address</td>
+            <td>The customer's shipping address</td>
+            <td>Up to 60 characters (no symbols)</td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>city</td>
+            <td>The city of the customer's shipping address</td>
+            <td>Up to 40 characters (no symbols)</td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>state</td>
+            <td>The state of the customer's shipping address</td>
+            <td>Up to 40 characters (no symbols)</td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>zip</td>
+            <td>The postal code of the customer's shipping address</td>
+            <td>Up to 20 characters (no symbols)</td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>country</td>
+            <td>The country of the customer's shipping address</td>
+            <td>Up to 60 characters (no symbols)</td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>phoneNumber</td>
+            <td>The phone number associated with the customer's shipping address</td>
+            <td>Up to 25 digits (no letters) For example, (123) 123-1234</td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>faxNumber</td>
+            <td>The fax number associated with the customer's shipping address</td>
+            <td>Up to 25 digits (no letters) For example, (123) 123-1234</td>
+            <td></td>
+          </tr>
+          
+          <tr>
+            <td>customerShippingAddressId</td>
+            <td>Payment gateway assigned ID associated with the customer shipping address</td>
+            <td>Numeric</td>
+            <td></td>
+          </tr>
+          
         </tbody>
       </table>
         </div>
