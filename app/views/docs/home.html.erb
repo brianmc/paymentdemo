@@ -62,6 +62,9 @@
               <a href="#recurring">Recurring Billing</a>
               <ul class="nav">
                 <li><a href="#recurring-create">Create Subscription</a></li>
+                <li><a href="#recurring-update">Update Subscription</a></li>
+                <li><a href="#recurring-delete">Cancel Subscription</a></li>
+                <li><a href="#recurring-get">Get Subscription Status</a></li>
               </ul>
             </li>
             <li>
@@ -86,6 +89,7 @@
     <p class="lead">The following API methods allow you to authorize a payment transaction, refund a payment, etc.</p>
 
     <h3 id="dtransactions-create">Create Transaction</h3>
+    <p>Create a payment transaction.</p>
     <div class="bs-example bs-example-tabs">
       <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#home" data-toggle="tab">Fields</a></li>
@@ -93,7 +97,6 @@
       </ul>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="home">
-        <p>The &lt;createTransactionRequest&gt; XML type has the following elements:</p>
     <table class="table table-condensed">
         <thead>
           <tr>
@@ -189,10 +192,59 @@
            <form method="post" action="">
            <p>
               <textarea id="txtReqXml" name="txtReqXml" cols="80" rows="6" style="">
-&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;isAliveRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd"&gt;
-    &lt;refId&gt;refid1&lt;/refId&gt;
-&lt;/isAliveRequest&gt;</textarea>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;createTransactionRequest 
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; 
+xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
+ &lt;merchantAuthentication&gt;
+ &lt;name&gt;89nE4Beh&lt;/name&gt;
+ &lt;transactionKey&gt;3vTn223M3862jMwa&lt;/transactionKey&gt;
+ &lt;/merchantAuthentication&gt;
+ &lt;refId&gt;123456&lt;/refId&gt;
+ &lt;transactionRequest&gt;
+ &lt;transactionType&gt;authOnlyTransaction&lt;/transactionType&gt;
+ &lt;amount&gt;5&lt;/amount&gt;
+ &lt;payment&gt;
+ &lt;creditCard&gt;
+ &lt;cardNumber&gt;5424000000000015&lt;/cardNumber&gt;
+ &lt;expirationDate&gt;1115&lt;/expirationDate&gt;
+ &lt;cardCode&gt;999&lt;/cardCode&gt;
+ &lt;/creditCard&gt;
+ &lt;/payment&gt;
+ &lt;lineItems&gt;
+ &lt;lineItem&gt;
+ &lt;itemId&gt;1&lt;/itemId&gt;
+ &lt;name&gt;vase&lt;/name&gt;
+ &lt;description&gt;Cannes logo &lt;/description&gt;
+ &lt;quantity&gt;18&lt;/quantity&gt;
+ &lt;unitPrice&gt;45.00&lt;/unitPrice&gt;
+ &lt;/lineItem&gt;
+ &lt;/lineItems&gt;
+ &lt;billTo&gt;
+ &lt;firstName&gt;Ellen&lt;/firstName&gt;
+ &lt;lastName&gt;Johnson&lt;/lastName&gt;
+ &lt;company&gt;Souveniropolis&lt;/company&gt;
+ &lt;address&gt;14 Main Street&lt;/address&gt;
+ &lt;city&gt;Pecan Springs&lt;/city&gt;
+ &lt;state&gt;TX&lt;/state&gt;
+ &lt;zip&gt;44628&lt;/zip&gt;
+ &lt;country&gt;USA&lt;/country&gt;
+ &lt;/billTo&gt;
+ &lt;shipTo&gt;
+ &lt;firstName&gt;China&lt;/firstName&gt;
+ &lt;lastName&gt;Bayles&lt;/lastName&gt;
+ &lt;company&gt;Thyme for Tea&lt;/company&gt;
+ &lt;address&gt;12 Main Street&lt;/address&gt;
+ &lt;city&gt;Pecan Springs&lt;/city&gt;
+ &lt;state&gt;TX&lt;/state&gt;
+ &lt;zip&gt;44628&lt;/zip&gt;
+ &lt;country&gt;USA&lt;/country&gt;
+ &lt;/shipTo&gt;
+ &lt;customerIP&gt;192.168.1.1&lt;/customerIP&gt;
+ &lt;/transactionRequest&gt;
+&lt;/createTransactionRequest&gt;
+              </textarea>
            </p>
     <p>
       <input type="button" id="btnSend" name="btnSend" value="Send" onclick="return btnSend_onclick()" />
@@ -226,7 +278,6 @@
       </ul>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="home">
-        <p>The &lt;createCustomerProfile&gt; XML type has the following elements:</p>
     <table class="table table-condensed">
         <thead>
           <tr>
@@ -353,6 +404,61 @@
       </div>
   </div>
 
+  <!-- Button Groups
+  ================================================== -->
+  <div class="bs-docs-section">
+    <div class="page-header">
+      <h1 id="recurring">Recurring Billing</h1>
+    </div>
+    <p class="lead">Provides a mechanism for developers to create, update and cancel ARB subscriptions</p>
+
+    <h3 id="recurring-create">Create Subscription</h3>
+    <p>Create a new customer profile along with any customer payment profiles and customer shipping addresses for the customer profile</p>
+   <div class="bs-example bs-example-tabs">
+      <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Fields</a></li>
+        <li><a href="#profile" data-toggle="tab">Try it</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+        <p>The &lt;createCustomerProfile&gt; XML type has the following elements:</p>
+    <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Value</th>
+            <th>Format</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>transactionType</td>
+            <td>Type of transaction (optional)</td>
+            <td>authOnlyTransaction<br/>authCaptureTransaction</td>
+            <td>If the value submitted does not match a supported value, the transaction is rejected.</td>
+          </tr>
+          <tr>
+            <td>amount</td>
+            <td>Amount of the transaction (Required)</td>
+            <td>Up to 15 digits with a decimal point</td>
+            <td>This is the TOTAL amount</td>
+          </tr>
+          <tr>
+            <td>cardNumber</td>
+            <td colspan="2"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+        </div>
+        <div class="tab-pane fade" id="profile">
+        </div>
+      </div>
+  </div>
+
+ 
+
   </div>
 
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
@@ -411,6 +517,9 @@ function btnSend_onclick() {
     txt = txt.replace(/></g, "> <");
     txt = txt.replace(/</g, "&lt;");
     txt = txt.replace(/>/g, "&gt;");
+     // Temp of course
+     txt = "&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;createTransactionResponse xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt; &lt;refId&gt;123456&lt;/refId&gt; &lt;messages&gt; &lt;resultCode&gt;Ok&lt;/resultCode&gt; &lt;message&gt; &lt;code&gt;I00001&lt;/code&gt; &lt;text&gt;Successful.&lt;/text&gt; &lt;/message&gt; &lt;/messages&gt; &lt;transactionResponse&gt; &lt;responseCode&gt;1&lt;/responseCode&gt; &lt;authCode&gt;000000&lt;/authCode&gt; &lt;avsResultCode&gt;P&lt;/avsResultCode&gt; &lt;cvvResultCode /&gt; &lt;cavvResultCode /&gt; &lt;transId&gt;0&lt;/transId&gt; &lt;refTransID /&gt; &lt;transHash&gt;B363D5C80A9195B54FD915C7D9B41F67&lt;/transHash&gt; &lt;testRequest&gt;1&lt;/testRequest&gt; &lt;accountNumber&gt;XXXX0015&lt;/accountNumber&gt; &lt;accountType&gt;MasterCard&lt;/accountType&gt; &lt;messages&gt; &lt;message&gt; &lt;code&gt;1&lt;/code&gt; &lt;description&gt;This transaction has been approved.&lt;/description&gt; &lt;/message&gt; &lt;/messages&gt; &lt;/transactionResponse&gt; &lt;/createTransactionResponse&gt;"
+
     document.getElementById("txtRespXml").innerHTML = txt;
     document.getElementById("btnSend").disabled = false;
   };
