@@ -27,9 +27,6 @@
         <li>
           <a href="../javascript">Client Libraries</a>
         </li>
-        <li>
-          <a href="../javascript">Authentication</a>
-        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -47,6 +44,10 @@
         <div class="bs-sidebar hidden-print" role="complementary">
           <ul class="nav bs-sidenav">
             <li>
+              <a href="#authentication">Authentication</a>
+              
+            </li>
+            <li>
               <a href="#transactions">Payment Transactions</a>
               <ul class="nav">
                 <li><a href="#transactions-create">Create Transaction</a></li>
@@ -59,6 +60,11 @@
                 <li><a href="#profiles-update-customer">Update Customer Profile</a></li>
                 <li><a href="#profiles-delete-customer">Delete Customer Profile</a></li>
                 <li><a href="#profiles-create-payment">Create Payment Profile</a></li>
+                <li><a href="#profiles-update-payment">Update Payment Profile</a></li>
+                <li><a href="#profiles-delete-payment">Delete Payment Profile</a></li>
+                <li><a href="#profiles-create-shipping">Create Shipping Profile</a></li>
+                <li><a href="#profiles-update-shipping">Update Shipping Profile</a></li>
+                <li><a href="#profiles-delete-shipping">Delete Shipping Profile</a></li>
               </ul>
             </li>
              <li>
@@ -247,11 +253,11 @@ xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
  &lt;customerIP&gt;192.168.1.1&lt;/customerIP&gt;
  &lt;/transactionRequest&gt;
 &lt;/createTransactionRequest&gt;
+
               </textarea>
            </p>
     <p>
-      <input type="button" id="btnSend" name="btnSend" value="Send" onclick="return btnSend_onclick()" />
-      <span style="font-size:smaller;">Click here to send the XML request.</span>
+      <button type="button" id="btnSend" name="btnSend" class="btn btn-primary" onclick="return btnSend_onclick()">SEND</button>
     </p>
     <div><span class="header">Response:</span> <span id="spnStatusCode" class="error"></span></div>
     <p>
@@ -406,7 +412,6 @@ xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
         </div>
       </div>
   </div>
-
   <!-- Button Groups
   ================================================== -->
   <div class="bs-docs-section">
