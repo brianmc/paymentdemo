@@ -473,6 +473,9 @@ xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
  <script language="javascript" type="text/javascript">
+ var myReqCodeMirror = CodeMirror.fromTextArea(txtReqXml, {"mode": "xml"});
+ 
+
 // <!CDATA[
 function XHConn()
 {
@@ -530,6 +533,7 @@ function btnSend_onclick() {
 
     document.getElementById("txtRespXml").innerHTML = txt;
     document.getElementById("btnSend").disabled = false;
+    var myRespCodeMirror = CodeMirror.fromTextArea(txtRespXml, {"mode": "xml"});
   };
   g_xc.connect("https://apitest.authorize.net/xml/v1/request.api", document.getElementById("txtReqXml").value, fnWhenDone);
 }
