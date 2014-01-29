@@ -1,5 +1,5 @@
 
-   <!-- temporary beta notice -->
+  <!-- temporary beta notice -->
   <div class="redesign-beta-notice"><div class="center"><bdi>
     <strong>Welcome to the new, improved Authorize.Net API Docs</strong> We hope you like it! If you have any suggestions or comments, <a href="/en-US/docs/Project:Feedback">please share!</a>
   </bdi></div>
@@ -102,7 +102,7 @@
     <div class="bs-example bs-example-tabs">
       <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#home" data-toggle="tab">Fields</a></li>
-        <li><a href="#profile" data-toggle="tab">Try it</a></li>
+        <li><a id="createTransactionTryIt" href="#profile" data-toggle="tab">Try it</a></li>
       </ul>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="home">
@@ -116,84 +116,84 @@
           </tr>
         </thead>
         <tbody>
-          
+
           <tr>
             <td>firstName</td>
             <td>The customer's first name</td>
             <td>Up to 50 characters (no symbols)</td>
             <td></td>
           </tr>
-          
+
           <tr>
             <td>lastName</td>
             <td>The customer's last name</td>
             <td>Up to 50 characters (no symbols)</td>
             <td></td>
           </tr>
-          
+
           <tr>
             <td>company</td>
             <td>The name of the company associated with the customer, if applicable</td>
             <td>Up to 50 characters (no symbols)</td>
             <td></td>
           </tr>
-          
+
           <tr>
             <td>address</td>
             <td>The customer's shipping address</td>
             <td>Up to 60 characters (no symbols)</td>
             <td></td>
           </tr>
-          
+
           <tr>
             <td>city</td>
             <td>The city of the customer's shipping address</td>
             <td>Up to 40 characters (no symbols)</td>
             <td></td>
           </tr>
-          
+
           <tr>
             <td>state</td>
             <td>The state of the customer's shipping address</td>
             <td>Up to 40 characters (no symbols)</td>
             <td></td>
           </tr>
-          
+
           <tr>
             <td>zip</td>
             <td>The postal code of the customer's shipping address</td>
             <td>Up to 20 characters (no symbols)</td>
             <td></td>
           </tr>
-          
+
           <tr>
             <td>country</td>
             <td>The country of the customer's shipping address</td>
             <td>Up to 60 characters (no symbols)</td>
             <td></td>
           </tr>
-          
+
           <tr>
             <td>phoneNumber</td>
             <td>The phone number associated with the customer's shipping address</td>
             <td>Up to 25 digits (no letters) For example, (123) 123-1234</td>
             <td></td>
           </tr>
-          
+
           <tr>
             <td>faxNumber</td>
             <td>The fax number associated with the customer's shipping address</td>
             <td>Up to 25 digits (no letters) For example, (123) 123-1234</td>
             <td></td>
           </tr>
-          
+
           <tr>
             <td>customerShippingAddressId</td>
             <td>Payment gateway assigned ID associated with the customer shipping address</td>
             <td>Numeric</td>
             <td></td>
           </tr>
-          
+
         </tbody>
       </table>
         </div>
@@ -202,9 +202,9 @@
            <p>
               <textarea id="txtReqXml" name="txtReqXml" cols="80" rows="6" style="">
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;createTransactionRequest 
+&lt;createTransactionRequest
 xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; 
+xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
 xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
  &lt;merchantAuthentication&gt;
  &lt;name&gt;89nE4Beh&lt;/name&gt;
@@ -465,18 +465,44 @@ xmlns=&quot;AnetApi/xml/v1/schema/AnetApiSchema.xsd&quot;&gt;
       </div>
   </div>
 
- 
+
 
   </div>
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.21.0/codemirror.min.css">
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.21.0/codemirror.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/3.21.0/mode/xml/xml.min.js"></script>
 
- <script language="javascript" type="text/javascript">
+<script language="javascript" type="text/javascript">
  var myReqCodeMirror = CodeMirror.fromTextArea(txtReqXml, {"mode": "xml"});
  
 
 // <!CDATA[
+var requestEditor, responseEditor;
+
+$(document).ready(function() {
+	requestEditor = CodeMirror.fromTextArea(document.getElementById('txtReqXml'), {
+		mode: 'xml',
+		lineNumbers: true
+	});
+
+	responseEditor = CodeMirror.fromTextArea(document.getElementById('txtRespXml'), {
+		mode: 'xml',
+		lineNumbers: true
+	});
+
+	$('#createTransactionTryIt').click(function() {
+		setTimeout(redrawEditors, 250);
+	});
+});
+
+function redrawEditors() {
+	requestEditor.refresh();
+	responseEditor.refresh();
+}
+
 function XHConn()
 {
   var xmlhttp, bComplete = false;
@@ -516,7 +542,7 @@ function XHConn()
 var g_xc = new XHConn();
 
 function btnSend_onclick() {
-  
+
   document.getElementById("btnSend").disabled = true;
   document.getElementById("txtRespXml").innerHTML = "";
   document.getElementById("spnStatusCode").innerHTML = "";
